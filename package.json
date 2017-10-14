@@ -1,0 +1,25 @@
+{
+  "name": "curl-node",
+  "version": "0.0.1",
+  "description": "linux tools - curl",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js www.baidu.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/molicreed/curl-node.git"
+  },
+  "keywords": [
+    "curl"
+  ],
+  "author": "creedlimo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/molicreed/curl-node/issues"
+  },
+  "homepage": "https://github.com/molicreed/curl-node#readme",
+  "dependencies": {
+    "commander": "^2.11.0"
+  }
+}
