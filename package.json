@@ -4,7 +4,7 @@
   "description": "linux tools - curl",
   "main": "app.js",
   "scripts": {
-    "test": "node app.js www.baidu.com"
+    "test": "node app.js http://baidu.com"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/molicreed/curl-node#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "commander": "^2.11.0"
   }
 }
