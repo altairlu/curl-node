@@ -10,7 +10,7 @@ config.url = url
 let log
 
 /**
- * 
+ * 根据字符串生成相应的空格，保持对齐
  * @param {String} str 
  * @param {Object} option
  */
@@ -29,7 +29,7 @@ let writeBlank = (str, option = {}) => {
 }
 
 /**
- * 
+ * 通过打退格符刷新输出
  * @param {String} str Output String
  * @param {Int} lastLength The length of last output String
  * @return {Int} The length of String this time
@@ -42,12 +42,16 @@ function freshWrite(str, lastLength) {
 }
 
 function writeToShell(res) {
-  if (config.include) {
-    console.log('HTTP/' + res.httpVersion, res.statusCode, res.statusMessage)
+  if (config.include || config.verbose) {
+    let headString = ''
+    if (config.verbose) headString = '< '
+    console.log(headString+'HTTP/' + res.httpVersion, res.statusCode, res.statusMessage)
     for (let key in res.headers) {
-      console.log(writeBlank(key + ':'), res.headers[key])
+      console.log(writeBlank(headString+key + ':'), res.headers[key])
     }
+    console.log(headString)
   }
+  
   res.pipe(process.stdout)
  
 }
