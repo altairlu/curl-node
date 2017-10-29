@@ -5,8 +5,11 @@ const request = require('./lib/request')
 const Log = require('./lib/log')
 const createFileStream = require('./lib/filestream')
 const utils = require('./lib/utils')
-let url = new Url(config.url)
+let url = new Url(config.url,{
+  verbose: config.verbose
+})
 config.url = url
+
 let log
 
 /**
@@ -40,7 +43,10 @@ function freshWrite(str, lastLength) {
   process.stdout.write(str)
   return str.length
 }
-
+/**
+ * The default
+ * @param {Object} res the response of request
+ */
 function writeToShell(res) {
   if (config.include || config.verbose) {
     let headString = ''
@@ -51,11 +57,14 @@ function writeToShell(res) {
     }
     console.log(headString)
   }
-  
+
   res.pipe(process.stdout)
  
 }
-
+/**
+ * curl -o [FILE]
+ * @param {Object} res the response of request
+ */
 function writeToFile(res) {
   res.pipe(createFileStream(config.output))
   let startTime = Date.now()
@@ -94,6 +103,7 @@ function writeToFile(res) {
   })
 
 }
+
 
 async function Request() {
   let res = await request(config, config.url)
